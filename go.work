@@ -17,4 +17,6 @@ use (
 	./14function
 	./15methods
 	./16defer
+	./17files
+	./18webrequests
 )
