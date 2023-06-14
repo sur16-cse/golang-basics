@@ -20,4 +20,7 @@ use (
 	./17files
 	./18webrequests
 	./19urls
+	./20getRequest
+	./21postJsonRequest
+	./22postFormRequest
 )

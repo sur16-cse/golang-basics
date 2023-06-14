@@ -1,4 +1,5 @@
-import express, { json, urlencoded } from 'express'
+const express = require('express')
+const { json, urlencoded } = require('body-parser')
 const app = express()
 const port =3000
 
