@@ -1,4 +1,4 @@
-module github.com/sur-16cse/mymodelapi
+module buildapi
 
 go 1.20
 

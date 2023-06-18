@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 	"strconv"
@@ -80,6 +81,15 @@ func createOneCourse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	//check only if title is duplicate
+	//loop title matches with course.coursename, JSON
+	for _, c := range courses {
+		if c.CourseName == course.CourseName {
+			json.NewEncoder(w).Encode("Duplicate data found")
+			return
+		}
+	}
+
 	//generate unique id,string
 	//append course into courses
 
@@ -87,7 +97,7 @@ func createOneCourse(w http.ResponseWriter, r *http.Request) {
 	course.CourseId = strconv.Itoa(rand.Intn(100))
 	courses = append(courses, course)
 	json.NewEncoder(w).Encode(course)
-	return
+	
 }
 
 func updateOneCourse(w http.ResponseWriter, r *http.Request) {
@@ -109,7 +119,9 @@ func updateOneCourse(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
+	 json.NewEncoder(w).Encode("No Course found with given id") 
 }
+
 func deleteAllCourses(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Delete All Courses")
 	courses = []Course{}
@@ -127,12 +139,30 @@ func deleteOneCourse(w http.ResponseWriter, r *http.Request) {
 	for index,course:=range courses{
 		if course.CourseId==params["id"]{
 			courses=append(courses[:index], courses[index+1:]...)
-			break
+			json.NewEncoder(w).Encode("Deleted Successfully")
+			return
 		}
 	}
+	json.NewEncoder(w).Encode("No Course found with given id") 
 }
 
 func main() {
-	fmt.Println("Delete All Courses")
-	// r:=mux.NewRouter()
+	fmt.Println("Api building")
+	r:=mux.NewRouter()
+
+	//seeding
+	courses=append(courses, Course{CourseId: "2",CourseName: "Reactjs",CoursePrice: 500,Author: &Author{Fullname: "Max",Website: "lco.dev"}})
+	courses=append(courses, Course{CourseId: "4",CourseName: "Mern",CoursePrice: 600,Author: &Author{Fullname: "Hari",Website: "go.dev"}})
+
+	//routing
+	r.HandleFunc("/",serveHome).Methods("GET")
+	r.HandleFunc("/courses",getAllCourses).Methods("GET")
+	r.HandleFunc("/course/{id}",getOneCourse).Methods("GET")
+	r.HandleFunc("/course",createOneCourse).Methods("Post")
+	r.HandleFunc("/course/{id}",updateOneCourse).Methods("PUT")
+	r.HandleFunc("/course/{id}",deleteOneCourse).Methods("DELETE")
+	r.HandleFunc("/courses",deleteAllCourses).Methods("DELETE")
+	
+	//listen to a port
+	log.Fatal(http.ListenAndServe(":4000",r))
 }

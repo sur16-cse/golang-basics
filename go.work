@@ -26,4 +26,5 @@ use (
 	./23encodeJson
 	./24decodeJson
 	./25mymodules
+	./26buildApi
 )
