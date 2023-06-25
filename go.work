@@ -30,4 +30,5 @@ use (
 	./27mongoApi
 	./28goRoutines
 	./29waitGroups
+	./30mutex
 )
