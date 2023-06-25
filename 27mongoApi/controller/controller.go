@@ -107,6 +107,7 @@ func getAllMovies() []primitive.M {
 	return movies
 }
 
+//exporting function
 func GetMyAllMovies(w http.ResponseWriter,r *http.Request)  {
 	w.Header().Set("Content-Type","application/x-www-form-urlencode")
 	allMovies:= getAllMovies()

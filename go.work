@@ -28,4 +28,6 @@ use (
 	./25mymodules
 	./26buildApi
 	./27mongoApi
+	./28goRoutines
+	./29waitGroups
 )
