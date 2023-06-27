@@ -1,0 +1,33 @@
+## golang-basics
+- hello
+- variables
+- userInput
+- conversion
+- time
+- pointers
+- array
+- slices
+- maps
+- ifelse
+- switch
+- structs
+- loop
+- function
+- methods
+- defer
+- files
+- webrequests
+- urls
+- getrequest
+- postjsonrequest
+- postformrequest
+- encodeJson
+- decodeJson
+- modules
+- buildapi
+- mongoConnection
+- goRoutines
+- waiotGroups
+- mutex
+  
+### complete code of Hitesh Choudhary Golang playlist
